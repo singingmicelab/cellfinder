@@ -37,9 +37,12 @@ def enhance_peaks(
     filtered_img = laplace(filtered_img)
     filtered_img *= -1
 
-    filtered_img -= filtered_img.min()
-    filtered_img /= filtered_img.max()
+    # filtered_img -= filtered_img.min()
+    # filtered_img /= filtered_img.max()
 
-    # To leave room to label in the 3d detection.
-    filtered_img *= clipping_value
+    # # To leave room to label in the 3d detection.
+    # filtered_img *= clipping_value
+
+    np.clip(filtered_img, 0, clipping_value, out=filtered_img)
+
     return filtered_img.astype(type_in)
